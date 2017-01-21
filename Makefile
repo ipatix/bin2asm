@@ -1,5 +1,6 @@
 CC = x86_64-w64-mingw32-gcc
-CFLAGS = -Werror -Wall -Wextra -Wconversion -O2
+STRIP = x86_64-w64-mingw32-strip
+CFLAGS = -Werror -Wall -Wextra -Wconversion -O2 -D NDEBUG
 BINARY = bin2asm
 
 SRC_FILES = $(wildcard *.c)
@@ -13,6 +14,7 @@ clean:
 
 $(BINARY): $(OBJ_FILES)
 	$(CC) -o $@ $^ $(LIBS)
+	$(STRIP) -s $@
 
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS) $(IMPORT)
